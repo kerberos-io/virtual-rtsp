@@ -9,6 +9,7 @@ The idea of a virtual RTSP is to simulate real-world IP cameras forwarding a RTS
 To build the container you can simply build the Dockerfile using following command.
 
     docker build -t kerberos/virtual-rtsp .
+    docker tag kerberos/virtual-rtsp kerberos/virtual-rtsp:1.0.1
 
 ## Run Docker container
 
@@ -20,9 +21,9 @@ We've published a couple of MP4s in the [v1.0.0 release](https://github.com/kerb
 
 Go ahead and download a mp4 from the [v1.0.0 release](https://github.com/kerberos-io/virtual-rtsp/releases/tag/v1.0.0).
 
-    mkdir samples && cd samples
     wget https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars.mp4
-    
+    mkdir samples && mv cars.mp4 samples
+
 If the mp4 is downloaded, we can inject the mp4 into our container by using volumes and specifying the environment variable `-e SOURCE_URL`.
 
     docker run -p 8554:8554 \
