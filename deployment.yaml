@@ -25,13 +25,13 @@ spec:
           - wget
           - "-O"
           - "/samples/cars.mp4"
-          - https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars.mp4
+          - https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars2.mp4
           volumeMounts:
           - name: tmp-samples
             mountPath: /samples
       containers:
         - name: virtual-rtsp
-          image: "kerberos/virtual-rtsp:1.0.0"
+          image: "kerberos/virtual-rtsp:1.0.2"
           imagePullPolicy: Always
           ports:
             - containerPort: 8554

@@ -7,6 +7,7 @@ WORKDIR /tmp
 RUN git clone https://github.com/aler9/rtsp-simple-server.git
 WORKDIR /tmp/rtsp-simple-server
 
+RUN git checkout v0.10.1
 RUN go mod download
 RUN go build -o /go/bin/rtsp-simple-server .
 
