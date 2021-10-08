@@ -44,7 +44,7 @@ or within a namespace
     kubectl create namespace my-namespace
     kubectl apply -f virtual-rtsp-deployment.yaml -n my-namespace
 
-Once deployed you should see it being created and deployed. It will first execute an init step `initContainer` to download a specific MP4 into the container; you [could change the url])(https://github.com/kerberos-io/virtual-rtsp/blob/master/virtual-rtsp-deployment.yaml#L28) to whatever you want.
+Once deployed you should see it being created and deployed. It will first execute an init step `initContainer` to download a specific MP4 into the container; you [could change the url](https://github.com/kerberos-io/virtual-rtsp/blob/master/virtual-rtsp-deployment.yaml#L28) to whatever you want.
 
 Once the MP4 is downloaded it will be loaded and served through the RTSP proxy. The RTSP stream is served on port `:8554` by default, but nothing is stopping you to change that as well.
 
