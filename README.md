@@ -33,4 +33,43 @@ If the mp4 is downloaded, we can inject the mp4 into our container by using volu
 
 ## Deploy to Kubernetes
 
-To be written
+Now we have a container build, we can deploy a Kubernetes Deployment resource that will run the virtual-rtsp container. Next to that, we also create Kubernetes Service resource, so we can access the RTSP connection on `:8554` from within the cluster; please note that you could also use the `LoadBalancer` service type if you would run a cluster on a managed Kubernetes provider.
+
+Start by having a look at the `virtual-rtsp-deployment.yaml` manifest, this includes the previously mentioned `Deployment` and `Service`. Go ahead and apply the manifest in the namespace you prefer.
+
+    kubectl apply -f virtual-rtsp-deployment.yaml 
+
+or within a namespace
+
+    kubectl create namespace my-namespace
+    kubectl apply -f virtual-rtsp-deployment.yaml -n my-namespace
+
+Once deployed you should see it being created and deployed. It will first execute an init step `initContainer` to download a specific MP4 into the container; you [could change the url])(https://github.com/kerberos-io/virtual-rtsp/blob/master/virtual-rtsp-deployment.yaml#L28) to whatever you want.
+
+Once the MP4 is downloaded it will be loaded and served through the RTSP proxy. The RTSP stream is served on port `:8554` by default, but nothing is stopping you to change that as well.
+
+If everything is properly deployed, you should see your service available, in the namespace you've specified. Once you validated everything is as it should be, go a head and test the endpoint.
+
+### Port-forward
+
+One way to test is start a port-forwarding to the service, you can achieve that as following:
+
+    kubectl port-forward svc/virtual-rtsp 8554:8554
+
+or within a namespace
+
+    kubectl port-forward svc/virtual-rtsp 8554:8554 -n my-namespace
+
+This will open a port `8554` on your host machine, and redirect all traffic to your service on port `8554` in the Kubernetes cluster.
+
+### Internal access
+
+If you want to access the RTSP stream from within the cluster, for example for your [Kerberos Agent and Kerberos Factory](https://doc.kerberos.io/factory/first-things-first/), there is no need for port-forwarding. We access the stream [using the internal DNS resolving of Kubernetes](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+
+You can access the stream as following `rtsp://{serviceName}.{namespaces}:8554/stream`, so for our example that would be
+
+    rtsp://virtual-rtsp:8854/stream
+
+or within a namespace
+
+    rtsp://virtual-rtsp.my-namespace:8854/stream
