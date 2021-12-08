@@ -26,7 +26,7 @@ Go ahead and download a mp4 from the [v1.0.0 release](https://github.com/kerbero
 
 If the mp4 is downloaded, we can inject the mp4 into our container by using volumes and specifying the environment variable `-e SOURCE_URL`.
 
-    docker run -p 8854:8854 \
+    docker run -p 8554:8554 \
     -e SOURCE_URL=file:///samples/cars.mp4 \
     -v $(pwd)/samples:/samples \
     kerberos/virtual-rtsp:1.0.2
@@ -68,8 +68,8 @@ If you want to access the RTSP stream from within the cluster, for example for y
 
 You can access the stream as following `rtsp://{serviceName}.{namespaces}:8554/stream`, so for our example that would be
 
-    rtsp://virtual-rtsp:8854/stream
+    rtsp://virtual-rtsp:8554/stream
 
 or within a namespace
 
-    rtsp://virtual-rtsp.my-namespace:8854/stream
+    rtsp://virtual-rtsp.my-namespace:8554/stream
