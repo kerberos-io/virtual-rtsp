@@ -26,7 +26,7 @@ Go ahead and download a mp4 from the [v1.0.0 release](https://github.com/kerbero
 
 If the mp4 is downloaded, we can inject the mp4 into our container by using volumes and specifying the environment variable `-e SOURCE_URL`.
 
-    docker run -p 8554:8554 \
+    docker run -p 8854:8854 \
     -e SOURCE_URL=file:///samples/cars.mp4 \
     -v $(pwd)/samples:/samples \
     kerberos/virtual-rtsp:1.0.2
