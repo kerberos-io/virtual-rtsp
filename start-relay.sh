@@ -16,8 +16,11 @@ if [[ $SOURCE_URL == rtsp://* ]] && [ "$FORCE_FFMPEG_SOURCE" == "false" ]; then
 else
 
    if [ "$SOURCE_URL" != "" ]; then
+      envsubst < /tmp/server.yml > /server.yml
+      echo "/server.yml"
+      cat /server.yml
       echo "Starting rtsp server..."
-      rtsp-simple-server &
+      rtsp-simple-server /server.yml &
       sleep 2
 
       echo "Start relaying from $SOURCE_URL to rtsp://0.0.0.0:8554/$STREAM_NAME"
