@@ -31,7 +31,7 @@ spec:
             mountPath: /samples
       containers:
         - name: virtual-rtsp
-          image: "kerberos/virtual-rtsp:1.0.5"
+          image: "kerberos/virtual-rtsp:1.0.6"
           imagePullPolicy: Always
           ports:
             - containerPort: 8554
