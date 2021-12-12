@@ -19,9 +19,9 @@ WORKDIR /tmp/rtsp-simple-proxy
 RUN go mod download
 RUN go build -o /go/bin/rtsp-simple-proxy .
 
-FROM jrottenberg/ffmpeg:4.0-alpine
+FROM jrottenberg/ffmpeg:4.4-alpine
 
-#ENV RTSP_PROTOCOLS=tcp
+ENV RTSP_PROTOCOLS=tcp
 ENV SOURCE_URL ''
 ENV STREAM_NAME 'stream'
 ENV RTSP_PROXY_SOURCE_TCP 'yes'
