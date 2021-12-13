@@ -74,7 +74,7 @@ or within a namespace
 
     rtsp://virtual-rtsp.my-namespace:8554/stream
 
-### How to use MP4s
+## How to use MP4s
 
 We noticed that some MP4s are encoded in a different way, and therefore will not work properly with the Kerberos Agent. Some MP4s will work, others will not. At the moment of writing, we didn't had the time to dig into this deeper. You will notice that most MP4s will be accepted by the `virtual-rtsp` client, and the relevant RTSP stream will even open in tools such as VLC. However once connected the RTSP stream to your Kerberos Agent, the agent might fail and crash, without any information/indications.
 
