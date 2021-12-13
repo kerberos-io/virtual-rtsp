@@ -91,7 +91,7 @@ To make it easier we have supplied a several of recordings with different resolu
         - wget
         - "-O"
         - "/samples/cars.mp4"
-        - https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars2.mp4
+        - https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/highway-10min-640x480-1.mp4
         volumeMounts:
         - name: tmp-samples
           mountPath: /samples
