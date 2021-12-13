@@ -2,7 +2,7 @@
 
 This project creates a virtual RTSP connection, based on a looping MP4. It is inspired by and build on top of [flaviostutz's work](https://github.com/flaviostutz/rtsp-relay).
 
-The idea of a virtual RTSP is to simulate real-world IP cameras forwarding a RTSP H264 encoded stream. The project is build for demo purposes, when no RTSP connection is available.
+The idea of a virtual RTSP is to simulate real-world IP cameras forwarding a RTSP H264 encoded stream. The project is build for demo purposes, when no RTSP connection is available. Please read below paragraph "How to use MP4s" to understand the limitations and best practices.
 
 ## Build with Docker
 
@@ -74,8 +74,25 @@ or within a namespace
 
     rtsp://virtual-rtsp.my-namespace:8554/stream
 
-### Converting MP4's
+### How to use MP4s
 
-We noticed that some MP4's are encoded in a different way, and therefore will not work properly with the Kerberos Agent. Run your MP4 through `ffmpeg` with follwing command.
-  
-    ffmpeg -i in.mp4 -vcodec libx264 -x264-params keyint=120:scenecut=0 -acodec copy out.mp4
+We noticed that some MP4s are encoded in a different way, and therefore will not work properly with the Kerberos Agent. Some MP4s will work, others will not. At the moment of writing, we didn't had the time to dig into this deeper. You will notice that most MP4s will be accepted by the `virtual-rtsp` client, and the relevant RTSP stream will even open in tools such as VLC. However once connected the RTSP stream to your Kerberos Agent, the agent might fail and crash, without any information/indications.
+
+The preferred way of using MP4s is to generate them through the Kerberos Agent. This means that a real RTSP camera is connected to a Kerberos Agent, and configured in a continuous recording mode (of for example 10min). The Kerberos Agent will then generate a 10 min video, or more, which you can use as a MP4 for your virtual RTSP stream.
+
+To make it easier we have supplied a several of recordings with different resolutions in the [1.0.0 release](https://github.com/kerberos-io/virtual-rtsp/releases/tag/v1.0.0). In this release you will find a couple of assets, MP4s, of different resoltions and durations.
+
+[By changing the url to the MP4 file](https://github.com/kerberos-io/virtual-rtsp/blob/master/virtual-rtsp-deployment.yaml#L28) you prefer you can simulate the relevant RTSP connection. This useful for testing and benchmarking specific hardware, that you consider for your Kerberos Factory/Agent deployment.
+
+    initContainers:
+      - name: init-samples
+        image: busybox
+        command:
+        - wget
+        - "-O"
+        - "/samples/cars.mp4"
+        - https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars2.mp4
+        volumeMounts:
+        - name: tmp-samples
+          mountPath: /samples
+
