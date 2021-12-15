@@ -21,13 +21,13 @@ We've published a couple of MP4s in the [v1.0.0 release](https://github.com/kerb
 
 Go ahead and download a mp4 from the [v1.0.0 release](https://github.com/kerberos-io/virtual-rtsp/releases/tag/v1.0.0).
 
-    wget https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/cars.mp4
-    mkdir samples && mv cars.mp4 samples
+    wget https://github.com/kerberos-io/virtual-rtsp/releases/download/v1.0.0/highway-10min-640x480-1.mp4
+    mkdir samples && mv highway-10min-640x480-1.mp4 samples
 
 If the mp4 is downloaded, we can inject the mp4 into our container by using volumes and specifying the environment variable `-e SOURCE_URL`.
 
     docker run -p 8554:8554 \
-    -e SOURCE_URL=file:///samples/cars.mp4 \
+    -e SOURCE_URL=file:///samples/highway-10min-640x480-1.mp4 \
     -v $(pwd)/samples:/samples \
     kerberos/virtual-rtsp:1.0.6
 
