@@ -1,4 +1,4 @@
-# Virtual RTSP
+# Virtual RTSP (IP Camera)
 
 This project creates a virtual RTSP connection, based on a looping MP4. It is inspired by and build on top of [flaviostutz's work](https://github.com/flaviostutz/rtsp-relay).
 
