@@ -15,14 +15,14 @@ Will generate following demo RTSP url:
 
     rtsp://fake.kerberos.io/stream
 
-## Build with Docker
+## Build with container image
 
 To build the container you can simply build the Dockerfile using following command.
 
     docker build -t kerberos/virtual-rtsp .
     docker tag kerberos/virtual-rtsp kerberos/virtual-rtsp:1.0.6
 
-## Run Docker container
+## Run container with Docker
 
 To run the container you can have to specify a couple of environment variables, and important load in a m4p which can be streamed (and looped) through a RTSP connection.
 
