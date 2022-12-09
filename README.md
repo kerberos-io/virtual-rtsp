@@ -4,6 +4,17 @@ This project creates a virtual RTSP connection, based on a looping MP4. It is in
 
 The idea of a virtual RTSP is to simulate real-world IP cameras forwarding a RTSP H264 encoded stream. The project is build for demo purposes, when no RTSP connection is available. Please read below paragraph "How to use MP4s" to understand the limitations and best practices.
 
+Running this project as following:
+
+    docker run -p 554:8554 \
+    -e SOURCE_URL=file:///samples/highway-10min-640x480-1.mp4 \
+    -v $(pwd)/samples:/samples \
+    -d --restart=always kerberos/virtual-rtsp:1.0.6
+
+Will generate following demo RTSP url:
+
+    rtsp://fake.kerberos.io/stream
+
 ## Build with Docker
 
 To build the container you can simply build the Dockerfile using following command.
@@ -26,11 +37,11 @@ Go ahead and download a mp4 from the [v1.0.0 release](https://github.com/kerbero
 
 If the mp4 is downloaded, we can inject the mp4 into our container by using volumes and specifying the environment variable `-e SOURCE_URL`.
 
-    docker run -p 8554:8554 \
+    docker run -p 554:8554 \
     -e SOURCE_URL=file:///samples/highway-10min-640x480-1.mp4 \
     -v $(pwd)/samples:/samples \
-    kerberos/virtual-rtsp:1.0.6
-
+    -d --restart=always kerberos/virtual-rtsp:1.0.6
+    
 ## Deploy to Kubernetes
 
 Now we have a container build, we can deploy a Kubernetes Deployment resource that will run the virtual-rtsp container. Next to that, we also create Kubernetes Service resource, so we can access the RTSP connection on `:8554` from within the cluster; please note that you could also use the `LoadBalancer` service type if you would run a cluster on a managed Kubernetes provider.
