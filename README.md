@@ -1,6 +1,6 @@
 # Virtual RTSP (IP Camera)
 
-This project creates a virtual RTSP connection, based on a looping MP4. It is inspired by and build on top of [flaviostutz's work](https://github.com/flaviostutz/rtsp-relay).
+This project creates a virtual RTSP connection, based on a looping MP4. It is inspired by and build on top of [flaviostutz's work](https://github.com/flaviostutz/rtsp-relay) and [RTSP Simple Server](https://github.com/aler9/rtsp-simple-server).
 
 The idea of a virtual RTSP is to simulate real-world IP cameras forwarding a RTSP H264 encoded stream. The project is build for demo purposes, when no RTSP connection is available. Please read below paragraph "How to use MP4s" to understand the limitations and best practices.
 
@@ -24,7 +24,7 @@ To build the container you can simply build the Dockerfile using following comma
 
 ## Run container with Docker
 
-To run the container you can have to specify a couple of environment variables, and important load in a m4p which can be streamed (and looped) through a RTSP connection.
+To run the container you can have to specify a couple of environment variables. These will make sure the MP4 is loaded and streamed through a RTSP connection.
 
 ### Download MP4
 
